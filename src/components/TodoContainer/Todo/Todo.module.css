@@ -1,0 +1,9 @@
+.box {
+  height: 100px;
+  color: red;
+  font-size: 25px;
+  display: flex;
+}
+.item {
+  margin: 10px;
+}

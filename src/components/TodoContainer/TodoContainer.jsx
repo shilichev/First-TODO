@@ -9,11 +9,27 @@ class TodoContainer extends React.Component {
     this.state = {
       todos: [],
     };
+    this.updateTodoById = this.updateTodoById.bind(this);
   }
 
   componentDidMount() {
     this.setState({ todos: todoContainer });
   }
+
+  updateTodoById(id, newTodo) {
+    this.setState({
+      todos: this.state.todos.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            ...newTodo,
+          };
+        }
+        return item;
+      }),
+    });
+  }
+ 
 
   render() {
     return (
@@ -24,6 +40,7 @@ class TodoContainer extends React.Component {
             title={item.title}
             description={item.description}
             status={item.status}
+            update={this.updateTodoById}
           />
         ))}
       </div>

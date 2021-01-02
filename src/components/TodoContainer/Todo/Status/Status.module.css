@@ -1,0 +1,8 @@
+.todo {
+  background-color: red;
+  color: white;
+}
+.done {
+  background-color: white;
+  color: red;
+}

@@ -2,7 +2,10 @@
   height: 100px;
   color: red;
   font-size: 25px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 100px 400px 100px;
+  grid-template-rows: auto;
+  justify-content: space-around;
 }
 .item {
   margin: 10px;

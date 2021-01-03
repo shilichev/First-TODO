@@ -17,7 +17,7 @@ class UpdateTitle extends React.Component {
           <input
             type="text"
             defaultValue={this.props.title}
-            onDoubleClick={this.toggle}
+            onClick={this.toggle}
           />
         </label>
       </div>

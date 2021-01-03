@@ -13,6 +13,7 @@ class Title extends React.Component {
   }
   updateTitle = () => {
     this.setState({ update: false });
+    console.log("update")
     this.toggleTitleChange();
   };
   toggleTitleChange = () => {

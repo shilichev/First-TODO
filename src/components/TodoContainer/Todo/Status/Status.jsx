@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Status.module.css";
+
 
 class Status extends React.Component {
   constructor(props) {

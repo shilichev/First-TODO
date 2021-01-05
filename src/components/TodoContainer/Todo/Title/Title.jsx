@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Title.module.css";
+
 import UpdateTitle from "./UpdateTitle";
 import NewTitle from "./NewTitle";
 
@@ -7,7 +7,7 @@ class Title extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      update: true,
+      update: false,
     };
   }
   updateTitle = () => {
@@ -15,7 +15,7 @@ class Title extends React.Component {
   };
 
   render() {
-    return !this.state.update ? (
+    return this.state.update ? (
       <UpdateTitle
         title={this.props.title}
         updateTitle={this.updateTitle}

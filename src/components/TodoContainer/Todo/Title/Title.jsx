@@ -8,34 +8,23 @@ class Title extends React.Component {
     super(props);
     this.state = {
       update: true,
-      s: <NewTitle title={this.props.title} updateTitle={this.updateTitle} />,
     };
   }
   updateTitle = () => {
-    this.setState({ update: false });
-    console.log("update")
-    this.toggleTitleChange();
-  };
-  toggleTitleChange = () => {
-    if (this.state.update) {
-      this.state.s = (
-        <UpdateTitle
-          title={this.props.title}
-          updateTitle={this.updateTitle}
-          update={this.props.update}
-          id={this.props.id}
-        />
-      );
-    } else {
-      this.state.s = (
-        <NewTitle title={this.props.title} updateTitle={this.updateTitle} />
-      );
-      return this.setState({ update: true });
-    }
+    this.setState({ update: !this.state.update });
   };
 
   render() {
-    return <div>{this.state.s}</div>;
+    return !this.state.update ? (
+      <UpdateTitle
+        title={this.props.title}
+        updateTitle={this.updateTitle}
+        update={this.props.update}
+        id={this.props.id}
+      />
+    ) : (
+      <NewTitle title={this.props.title} updateTitle={this.updateTitle} />
+    );
   }
 }
 

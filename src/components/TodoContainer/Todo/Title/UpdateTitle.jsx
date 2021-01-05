@@ -7,17 +7,23 @@ class UpdateTitle extends React.Component {
   toggle = (e) => {
     if (e.target.value !== e.target.defaultValue) {
       this.props.update(this.props.id, { title: `${e.target.value}` });
-      console.log(1)
+      console.log(1);
+    }
+  };
+  _handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      this.toggle(e);
+      this.props.updateTitle();
     }
   };
   render() {
     return (
-      <div className="title" onDoubleClick={this.props.updateTitle}>
+      <div className="title">
         <label>
           <input
             type="text"
             defaultValue={this.props.title}
-            onClick={this.toggle}
+            onKeyDown={this._handleKeyDown}
           />
         </label>
       </div>

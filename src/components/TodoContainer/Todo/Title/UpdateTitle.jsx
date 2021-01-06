@@ -4,18 +4,16 @@ class UpdateTitle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "Help",
+      title: this.props.title,
     };
   }
 
   _handleKeyDown = (e, newText) => {
     if (e === "Enter") {
-      console.log(newText);
       this.setState({
         title: newText,
       });
       this.props.updateTitle(newText);
-      
     }
   };
 

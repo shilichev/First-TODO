@@ -12,14 +12,13 @@ class Title extends React.Component {
   }
   updateTitle = (title) => {
     this.setState({ update: !this.state.update });
-    this.props.update(this.props.id, { title: title });
+    if (this.state.update) this.props.update(this.props.id, { title: title });
   };
   render() {
     return this.state.update ? (
       <UpdateTitle
         title={this.props.title}
         updateTitle={this.updateTitle}
-        toggleTitle={this.toggleTitle}
         id={this.props.id}
       />
     ) : (

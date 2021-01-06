@@ -3,22 +3,32 @@ import React from "react";
 class UpdateTitle extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      title: "Help",
+    };
   }
 
-  _handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      this.props.updateTitle();
-      this.props.update(this.props.id, { title: `${e.target.value}` });
+  _handleKeyDown = (e, newText) => {
+    if (e === "Enter") {
+      console.log(newText);
+      this.setState({
+        title: newText,
+      });
+      this.props.updateTitle(newText);
+      
     }
   };
+
   render() {
     return (
       <div className="title">
         <label>
           <input
             type="text"
-            defaultValue={this.props.title}
-            onKeyDown={this._handleKeyDown}
+            defaultValue={this.state.title}
+            onKeyDown={(event) =>
+              this._handleKeyDown(event.key, event.target.value)
+            }
           />
         </label>
       </div>

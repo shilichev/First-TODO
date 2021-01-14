@@ -10,3 +10,9 @@
 .item {
   margin: 10px;
 }
+button img {
+  width: 25px;
+}
+.buttons {
+  display: flex;
+}

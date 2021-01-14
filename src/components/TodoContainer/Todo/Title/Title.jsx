@@ -1,7 +1,6 @@
 import React from "react";
 
 import UpdateTitle from "./UpdateTitle";
-import NewTitle from "./NewTitle";
 
 class Title extends React.Component {
   constructor(props) {
@@ -10,10 +9,21 @@ class Title extends React.Component {
       update: false,
     };
   }
-  updateTitle = (title) => {
-    this.setState({ update: !this.state.update });
-    if (this.state.update) this.props.update(this.props.id, { title: title });
+  checkScale = () => {
+    if (this.props.scale === "title") {
+
+    }
   };
+  startTitle = () => {
+    this.setState({ update: !this.state.update });
+  };
+
+  updateTitle = (title) => {
+    this.startTitle();
+    if (this.state.update) this.props.update(this.props.id, { title: title });
+   
+  };
+
   render() {
     return this.state.update ? (
       <UpdateTitle
@@ -22,7 +32,9 @@ class Title extends React.Component {
         id={this.props.id}
       />
     ) : (
-      <NewTitle title={this.props.title} updateTitle={this.updateTitle} />
+      <div className="title" onClick={this.updateTitle}>
+        <label>{this.props.title}</label>
+      </div>
     );
   }
 }

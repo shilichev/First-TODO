@@ -1,7 +1,7 @@
 import React from "react";
 
 import UpdateDescription from "./UpdateDescription";
-import NewDescription from "./NewDescription";
+
 
 class Description extends React.Component {
   constructor(props) {
@@ -10,8 +10,18 @@ class Description extends React.Component {
       update: false,
     };
   }
-  updateDescription = () => {
+  checkScale = () => {
+    if (this.props.scale === "title") {
+      console.log(1);
+    }
+  };
+  startDescription = () => {
     this.setState({ update: !this.state.update });
+  };
+  updateDescription = (description) => {
+    this.startDescription();
+    if (this.state.update)
+      this.props.update(this.props.id, { description: description });
   };
 
   render() {
@@ -23,10 +33,9 @@ class Description extends React.Component {
         id={this.props.id}
       />
     ) : (
-      <NewDescription
-        description={this.props.description}
-        updateDescription={this.updateDescription}
-      />
+      <div className="description" onClick={this.updateDescription}>
+        <label>{this.props.description}</label>
+      </div>
     );
   }
 }

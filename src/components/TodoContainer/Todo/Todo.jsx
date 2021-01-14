@@ -1,7 +1,9 @@
 import React from "react";
+import UpdateFild from "../common/UpdateFild/UpdateFild";
 import Description from "./Description/Description";
 import Status from "./Status/Status";
 import Title from "./Title/Title";
+import Fild from "../common/UpdateFild/Fild";
 import classes from "./Todo.module.css";
 
 function Todo(props) {
@@ -14,11 +16,23 @@ function Todo(props) {
     <div className={classes.box}>
       <div className={classes.item}>
         <b>
-          <Title title={title} id={id} update={props.update} />
+          {/* <Title title={title} id={id} update={props.update} scale="title" /> */}
+          <Fild fild={title} id={id} update={props.update} scale="title" />
         </b>
       </div>
       <div className={classes.item}>
-        <Description description={description} id={id} update={props.update} />
+        {/* <Description
+          description={description}
+          id={id}
+          update={props.update}
+          scale="description"
+        /> */}
+        <Fild
+          fild={description}
+          id={id}
+          update={props.update}
+          scale="description"
+        />
       </div>
       <div className={classes.item}>
         <b>

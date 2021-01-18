@@ -6,57 +6,58 @@ const canselImgUrl =
 const confirmImgUrl =
   "https://cdn.iconscout.com/icon/premium/png-512-thumb/confirm-37-713284.png";
 
-class UpdateFild extends React.Component {
+class UpdateField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fild: this.props.fild,
+      field: this.props.field,
     };
   }
   handleKeyDown = (e) => {
-    if (e === "Enter") {
-      this.props.updateFild(this.state.fild);
+    if (e.key === "Enter") {
+      this.props.updateField(this.state.field);
     }
   };
-  control = (newText) => {
+  control = (e) => {
     this.setState({
-      fild: newText,
+      field: e.target.value,
     });
   };
 
   buttonCancel = () => {
-    this.props.updateFild(this.props.fild);
+    this.props.updateField(this.props.field);
   };
   buttonConfirm = () => {
-    this.props.updateFild(this.state.fild);
+    this.props.updateField(this.state.field);
   };
 
   render() {
+    const { field } = this.state;
     return (
       <div className="title">
         <label>
           {this.props.status ? (
             <input
               type="text"
-              defaultValue={this.props.fild}
-              onChange={(event) => this.control(event.target.value)}
-              onKeyDown={(event) => this.handleKeyDown(event.key)}
+              value={field}
+              onChange={this.control}
+              onKeyDown={this.handleKeyDown}
             />
           ) : (
             <textarea
-              defaultValue={this.props.fild}
-              onChange={(event) => this.control(event.target.value)}
-              onKeyDown={(event) => this.handleKeyDown(event.key)}
+              value={field}
+              onChange={this.control}
+              onKeyDown={this.handleKeyDown}
             />
           )}
         </label>
         <div className={classes.buttons}>
           <button onClick={this.buttonCancel}>
-            <img src={canselImgUrl} alt="Cancel" />
+            <i class="fas fa-window-close  " ></i>
             Cancel
           </button>
           <button onClick={this.buttonConfirm}>
-            <img src={confirmImgUrl} alt="Confirm" />
+            <i class="fas fa-check-square"></i>
             Confirm
           </button>
         </div>
@@ -65,4 +66,4 @@ class UpdateFild extends React.Component {
   }
 }
 
-export default UpdateFild;
+export default UpdateField;

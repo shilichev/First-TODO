@@ -1,56 +1,57 @@
 import React from "react";
 
-import UpdateFild from "./UpdateFild";
+import UpdateField from "./UpdateField";
 
-class Fild extends React.Component {
+class Field extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       update: false,
       scale: "",
-      fild: {},
     };
   }
 
-  startFild = () => {
+  startField = () => {
     this.setState({ update: !this.state.update });
   };
 
-  updateFild = (fild) => {
-    this.startFild();
+  updateField = (field) => {
+    this.startField();
     console.log(this.state.status);
     if (this.state.status) {
-      if (this.state.update) this.props.update(this.props.id, { title: fild });
+       if (this.state.update)this.props.update(this.props.id, { title: field });
     } else {
       if (this.state.update)
-        this.props.update(this.props.id, { description: fild });
+        this.props.update(this.props.id, { description: field });
     }
   };
   componentDidMount() {
     if (this.props.scale === "title") {
-      this.setState({ scale: "title", fild: this.props.fild, status: true });
+      this.setState({
+        scale: "title",
+        status: true,
+      });
     } else if (this.props.scale === "description") {
       this.setState({
         scale: "description",
-        fild: this.props.description,
         status: false,
       });
     }
   }
   render() {
     return this.state.update ? (
-      <UpdateFild
+      <UpdateField
         status={this.state.status}
-        fild={this.props.fild}
-        updateFild={this.updateFild}
+        field={this.props.field}
+        updateField={this.updateField}
         id={this.props.id}
       />
     ) : (
-      <div className={this.state.scale} onClick={this.updateFild}>
-        <label>{this.props.fild}</label>
+      <div className={this.state.scale} onClick={this.updateField}>
+        <label>{this.props.field}</label>
       </div>
     );
   }
 }
 
-export default Fild;
+export default Field;

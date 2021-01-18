@@ -3,9 +3,10 @@
   color: red;
   font-size: 25px;
   display: grid;
-  grid-template-columns: 100px 400px 100px;
+  grid-template-columns: 300px 600px 300px;
   grid-template-rows: auto;
   justify-content: space-around;
+  margin-top: 30px;
 }
 .item {
   margin: 10px;
@@ -15,4 +16,9 @@ button img {
 }
 .buttons {
   display: flex;
+}
+.checkbox {
+  position: absolute;
+  width: 100px;
+  margin-left: 200px;
 }

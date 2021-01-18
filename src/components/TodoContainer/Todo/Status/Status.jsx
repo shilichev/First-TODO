@@ -1,5 +1,5 @@
 import React from "react";
-
+import classes from "../Todo.module.css";
 
 class Status extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Status extends React.Component {
   };
   render() {
     return (
-      <div className="checkbox">
+      <div className={classes.checkbox}>
         <label>
           <input
             type="checkbox"

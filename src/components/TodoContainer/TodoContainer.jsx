@@ -10,6 +10,7 @@ class TodoContainer extends React.Component {
       todos: [],
     };
     this.updateTodoById = this.updateTodoById.bind(this);
+    this.deleteTodoById = this.deleteTodoById.bind(this);
   }
 
   componentDidMount() {
@@ -17,6 +18,7 @@ class TodoContainer extends React.Component {
   }
 
   updateTodoById(id, newTodo) {
+    console.log(id)
     this.setState({
       todos: this.state.todos.map((item) => {
         if (item.id === id) {
@@ -29,7 +31,12 @@ class TodoContainer extends React.Component {
       }),
     });
   }
-
+  deleteTodoById(id) {
+    console.log(id);
+    this.setState({
+      todos: this.state.todos.filter((item) => item.id !== id),
+    });
+  }
   render() {
     return (
       <div className={classes.container}>
@@ -41,6 +48,7 @@ class TodoContainer extends React.Component {
             description={item.description}
             status={item.status}
             update={this.updateTodoById}
+            delete={this.deleteTodoById}
           />
         ))}
       </div>

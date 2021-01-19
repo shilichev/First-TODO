@@ -37,17 +37,15 @@ class UpdateField extends React.Component {
       <div className="title">
         <label>
           {this.props.status ? (
-            <input
-              type="text"
-              value={field}
-              onChange={this.control}
-              onKeyDown={this.handleKeyDown}
+            <input type="text"
+                   value={field}
+                   onChange={this.control}
+                   onKeyDown={this.handleKeyDown}
             />
           ) : (
-            <textarea
-              value={field}
-              onChange={this.control}
-              onKeyDown={this.handleKeyDown}
+            <textarea value={field}
+                      onChange={this.control}
+                      onKeyDown={this.handleKeyDown}
             />
           )}
         </label>

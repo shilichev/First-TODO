@@ -28,5 +28,4 @@ class Status extends React.Component {
     );
   }
 }
-
 export default Status;

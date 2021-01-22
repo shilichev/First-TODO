@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./TodoContainer.module.css";
 import { todoContainer } from "../../content/todoContainer";
 import Todo from "./Todo/Todo";
+import Add from "./Add/Add";
 
 class TodoContainer extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class TodoContainer extends React.Component {
     };
     this.updateTodoById = this.updateTodoById.bind(this);
     this.deleteTodoById = this.deleteTodoById.bind(this);
+    this.addNewTodo = this.addNewTodo.bind(this);
   }
 
   componentDidMount() {
@@ -18,7 +20,7 @@ class TodoContainer extends React.Component {
   }
 
   updateTodoById(id, newTodo) {
-    console.log(id)
+    console.log(id);
     this.setState({
       todos: this.state.todos.map((item) => {
         if (item.id === id) {
@@ -32,14 +34,36 @@ class TodoContainer extends React.Component {
     });
   }
   deleteTodoById(id) {
-    console.log(id);
     this.setState({
       todos: this.state.todos.filter((item) => item.id !== id),
     });
   }
+  createRandomId = (title) => {
+    let randomId = Math.round(Math.random() * (9999 - 1000) + 1000);
+    this.addNewTodo(title, randomId);
+  };
+  addNewTodo(title, newId) {
+    if (this.state.todos.find((item) => item.id == newId)) {
+      this.createRandomId(title);
+    } else {
+      let newTodo = {
+        id: `${newId}`,
+        title: title,
+        description: "New todo",
+        status: "TODO",
+      };
+      let newTodos = [newTodo, ...this.state.todos];
+      this.setState({ todos: newTodos });
+      console.log(this.state.todos);
+    }
+
+    
+  }
+
   render() {
     return (
       <div className={classes.container}>
+        <Add addNewTodo={this.createRandomId} />
         {this.state.todos.map((item) => (
           <Todo
             key={item.id}

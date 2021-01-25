@@ -10,8 +10,10 @@ class Delete extends React.Component {
   };
   render() {
     return (
-      <div onClick={this.deleteContainer}>
-        <i className="fas fa-trash-alt"></i>
+      <div className={classes.item}>
+        <div onClick={this.deleteContainer}>
+          <i className="fas fa-trash-alt" />
+        </div>  
       </div>
     );
   }

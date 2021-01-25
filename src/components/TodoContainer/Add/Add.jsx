@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "./Add.module.css";
 
 class Add extends React.Component {
   constructor(props) {
@@ -15,9 +16,11 @@ class Add extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div className={classes.add}>
         <input value={this.state.value} onChange={this.onChangeText}></input>
-        <button onClick={this.addNewTodo}>Add TODO</button>
+        <button onClick={this.addNewTodo}>
+          <strong>ADD</strong>
+        </button>
       </div>
     );
   }

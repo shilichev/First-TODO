@@ -1,5 +1,4 @@
 import React from "react";
-import UpdateField from "../common/UpdateField/UpdateField";
 
 import Status from "./Status/Status";
 import Delete from "./Delete/Delete";
@@ -15,30 +14,15 @@ function Todo(props) {
 
   return (
     <div className={classes.box}>
-      <div className={classes.item}>
-        <b>
-          <Status status={status} id={id} update={props.update} />
-        </b>
-      </div>
-      <div className={classes.item}>
-        <b>
-          <Field field={title} id={id} update={props.update} scale="title" />
-        </b>
-      </div>
-      <div className={classes.item}>
-        <Field
-          field={description}
-          id={id}
-          update={props.update}
-          scale="description"
-        />
-      </div>
-
-      <div className={classes.item}>
-        <b>
-          <Delete delete={props.delete} id={id} />
-        </b>
-      </div>
+      <Status status={status} id={id} update={props.update} />
+      <Field field={title} id={id} update={props.update} scale="title" />
+      <Field
+        field={description}
+        id={id}
+        update={props.update}
+        scale="description"
+      />
+      <Delete delete={props.delete} id={id} />
     </div>
   );
 }

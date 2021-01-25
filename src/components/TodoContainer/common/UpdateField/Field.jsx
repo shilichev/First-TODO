@@ -1,5 +1,5 @@
 import React from "react";
-
+import classes from "../../Todo/Todo.module.css";
 import UpdateField from "./UpdateField";
 
 class Field extends React.Component {
@@ -19,7 +19,7 @@ class Field extends React.Component {
     this.startField();
     console.log(this.state.status);
     if (this.state.status) {
-       if (this.state.update)this.props.update(this.props.id, { title: field });
+      if (this.state.update) this.props.update(this.props.id, { title: field });
     } else {
       if (this.state.update)
         this.props.update(this.props.id, { description: field });
@@ -40,15 +40,19 @@ class Field extends React.Component {
   }
   render() {
     return this.state.update ? (
-      <UpdateField
-        status={this.state.status}
-        field={this.props.field}
-        updateField={this.updateField}
-        id={this.props.id}
-      />
+      <div className={classes.item}>
+        <UpdateField
+          status={this.state.status}
+          field={this.props.field}
+          updateField={this.updateField}
+          id={this.props.id}
+        />
+      </div>
     ) : (
-      <div className={this.state.scale} onClick={this.updateField}>
-        <label>{this.props.field}</label>
+      <div className={classes.item}>
+        <div className={this.state.scale} onClick={this.updateField}>
+          <label>{this.props.field}</label>
+        </div>
       </div>
     );
   }

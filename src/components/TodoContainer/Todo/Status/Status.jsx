@@ -14,16 +14,18 @@ class Status extends React.Component {
   };
   render() {
     return (
-      <div className={classes.checkbox}>
-        <label>
-          <input
-            type="checkbox"
-            checked={this.props.status === "DONE"}
-            onChange={this.toggleCheckboxChange}
-          />
+      <div className={classes.item}>
+        <div className={classes.checkbox}>
+          <label>
+            <input
+              type="checkbox"
+              checked={this.props.status === "DONE"}
+              onChange={this.toggleCheckboxChange}
+            />
 
-          {this.props.status}
-        </label>
+            {this.props.status}
+          </label>
+        </div>
       </div>
     );
   }

@@ -40,7 +40,7 @@ class TodoContainer extends React.Component {
   }
   createRandomId = (title) => {
     let randomId = Math.round(Math.random() * (9999 - 1000) + 1000);
-    this.addNewTodo(title, randomId);
+    return addNewTodo(title, randomId)
   };
   addNewTodo(title, newId) {
     if (this.state.todos.find((item) => item.id == newId)) {

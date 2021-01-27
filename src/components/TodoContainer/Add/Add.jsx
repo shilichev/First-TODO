@@ -12,7 +12,7 @@ class Add extends React.Component {
     this.setState({ value: event.target.value });
   };
   addNewTodo = () => {
-    this.props.addNewTodo(this.state.value);
+    this.props.addNewTodo(this.state.value, '');
   };
   render() {
     return (

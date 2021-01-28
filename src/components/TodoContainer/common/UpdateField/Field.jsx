@@ -2,6 +2,10 @@ import React from "react";
 import classes from "../../Todo/Todo.module.css";
 import UpdateField from "./UpdateField";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { updateTodoById } from "../../../../actions/actions";
+
 class Field extends React.Component {
   constructor(props) {
     super(props);
@@ -19,10 +23,11 @@ class Field extends React.Component {
     this.startField();
     console.log(this.state.status);
     if (this.state.status) {
-      if (this.state.update) this.props.update(this.props.id, { title: field });
+      if (this.state.update)
+        this.props.action.updateTodoById(this.props.id, { title: field });
     } else {
       if (this.state.update)
-        this.props.update(this.props.id, { description: field });
+        this.props.action.updateTodoById(this.props.id, { description: field });
     }
   };
   componentDidMount() {
@@ -57,5 +62,13 @@ class Field extends React.Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => ({
+  action: bindActionCreators(
+    {
+      updateTodoById,
+    },
+    dispatch
+  ),
+});
 
-export default Field;
+export default connect(null, mapDispatchToProps)(Field);

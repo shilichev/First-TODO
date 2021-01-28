@@ -14,15 +14,10 @@ function Todo(props) {
 
   return (
     <div className={classes.box}>
-      <Status status={status} id={id} update={props.update} />
-      <Field field={title} id={id} update={props.update} scale="title" />
-      <Field
-        field={description}
-        id={id}
-        update={props.update}
-        scale="description"
-      />
-      <Delete delete={props.delete} id={id} />
+      <Status status={status} id={id} />
+      <Field field={title} id={id} scale="title" />
+      <Field field={description} id={id} scale="description" />
+      <Delete id={id} />
     </div>
   );
 }

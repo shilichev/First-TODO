@@ -8,61 +8,12 @@ import { connect } from "react-redux";
 class TodoContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      todos: [],
-    };
-    this.updateTodoById = this.updateTodoById.bind(this);
-    this.deleteTodoById = this.deleteTodoById.bind(this);
-    this.addNewTodo = this.addNewTodo.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({ todos: todoContainer });
-  }
-
-  updateTodoById(id, newTodo) {
-    console.log(id);
-    this.setState({
-      todos: this.state.todos.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            ...newTodo,
-          };
-        }
-        return item;
-      }),
-    });
-  }
-  deleteTodoById(id) {
-    this.setState({
-      todos: this.state.todos.filter((item) => item.id !== id),
-    });
-  }
-  createRandomId = (title) => {
-    let randomId = Math.round(Math.random() * (9999 - 1000) + 1000);
-    return this.addNewTodo(title, randomId);
-  };
-  addNewTodo(title, newId) {
-    if (this.state.todos.find((item) => item.id == newId)) {
-      this.createRandomId(title);
-    } else {
-      let newTodo = {
-        id: `${newId}`,
-        title: title,
-        description: "New todo",
-        status: "TODO",
-      };
-      let newTodos = [newTodo, ...this.state.todos];
-      this.setState({ todos: newTodos });
-      console.log(this.state.todos);
-    }
   }
 
   render() {
     return (
       <div className={classes.container}>
-        <Add addNewTodo={this.createRandomId} />
+        <Add />
         {this.props.todos.map((item) => (
           <Todo
             key={item.id}
@@ -82,3 +33,8 @@ const mapStateToProps = (state) => ({
   todos: state.todos,
 });
 export default connect(mapStateToProps)(TodoContainer);
+
+// createRandomId = (title) => {
+//   let randomId = Math.round(Math.random() * (9999 - 1000) + 1000);
+//   return this.addNewTodo(title, randomId);
+// };

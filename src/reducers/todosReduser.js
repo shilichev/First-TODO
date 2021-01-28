@@ -1,14 +1,13 @@
-import {todoContainer} from "./../content/todoContainer";
+import { todoContainer } from "./../content/todoContainer";
 
 const initialState = todoContainer;
 
-
 const todosReducer = (state = initialState, action) => {
   if (action.type === "ADD_NEW_TODO") {
-    return [state, ...action.newTodo];
+    return [action.newTodo, ...state];
   }
   if (action.type === "UPDATE_TODO_BY_ID") {
-    return state.todos.map((item) => {
+    return state.map((item) => {
       if (item.id === action.id) {
         return { ...item, ...action.newTodo };
       }

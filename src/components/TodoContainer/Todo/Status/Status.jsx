@@ -1,5 +1,8 @@
 import React from "react";
 import classes from "../Todo.module.css";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { updateTodoById } from "../../../../actions/actions";
 
 class Status extends React.Component {
   constructor(props) {
@@ -7,9 +10,9 @@ class Status extends React.Component {
   }
   toggleCheckboxChange = (e) => {
     if (e.target.checked) {
-      this.props.update(this.props.id, { status: "DONE" });
+      this.props.action.updateTodoById(this.props.id, { status: "DONE" });
     } else {
-      this.props.update(this.props.id, { status: "TODO" });
+      this.props.action.updateTodoById(this.props.id, { status: "TODO" });
     }
   };
   render() {
@@ -30,4 +33,13 @@ class Status extends React.Component {
     );
   }
 }
-export default Status;
+const mapDispatchToProps = (dispatch) => ({
+  action: bindActionCreators(
+    {
+      updateTodoById,
+    },
+    dispatch
+  ),
+});
+
+export default connect(null, mapDispatchToProps)(Status);

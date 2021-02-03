@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./TodoContainer.module.css";
-import { todoContainer } from "../../content/todoContainer";
 import Todo from "./Todo/Todo";
 import Add from "./Add/Add";
 import { connect } from "react-redux";
@@ -9,7 +8,11 @@ class TodoContainer extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  async componentDidMount() {
+    let loh = await fetch("http://localhost:5000/todos");
+    // let x = loh.json();
+    console.log(loh);
+  }
   render() {
     return (
       <div className={classes.container}>

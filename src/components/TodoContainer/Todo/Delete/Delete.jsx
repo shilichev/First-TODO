@@ -2,14 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import classes from "../Todo.module.css";
 import { bindActionCreators } from "redux";
-import { deleteTodoById } from "../../../../actions/actions";
+import { apiDeleteTodoById } from "../../../../actions/actions";
 
 class Delete extends React.Component {
   constructor(props) {
     super(props);
   }
   deleteContainer = () => {
-    this.props.action.deleteTodoById(this.props.id);
+    this.props.actions.apiDeleteTodoById(this.props.id);
+    console.log(this.props.id);
   };
   render() {
     return (
@@ -23,12 +24,11 @@ class Delete extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  action: bindActionCreators(
+  actions: bindActionCreators(
     {
-      deleteTodoById,
+      apiDeleteTodoById,
     },
     dispatch
   ),
 });
-
 export default connect(null, mapDispatchToProps)(Delete);

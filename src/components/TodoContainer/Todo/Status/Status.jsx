@@ -2,7 +2,7 @@ import React from "react";
 import classes from "../Todo.module.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateTodoById } from "../../../../actions/actions";
+import { updateTodoById } from "../../../../actions/actionsCreators";
 
 class Status extends React.Component {
   constructor(props) {

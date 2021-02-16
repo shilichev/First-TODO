@@ -6,12 +6,12 @@ import Delete from "./Delete/Delete";
 import Field from "../common/UpdateField/Field";
 import classes from "./Todo.module.css";
 
-function Todo(props) {
-  let id = props.id;
-  let title = props.title;
-  let description = props.description;
-  let status = props.status;
-
+const Todo = (props) => {
+  let id = props.todos.id;
+  let title = props.todos.title;
+  let description = props.todos.description;
+  let status = props.todos.status;
+ console.log(props.todos)
   return (
     <div className={classes.box}>
       <Status status={status} id={id} />
@@ -20,6 +20,6 @@ function Todo(props) {
       <Delete id={id} />
     </div>
   );
-}
+};
 
 export default Todo;

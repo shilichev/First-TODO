@@ -2,7 +2,7 @@ import React from "react";
 import classes from "../Todo.module.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateTodoById } from "../../../../actions/actionsCreators";
+import { apiUpdateTodoById } from "../../../../actions/actions";
 
 class Status extends React.Component {
   constructor(props) {
@@ -10,9 +10,9 @@ class Status extends React.Component {
   }
   toggleCheckboxChange = (e) => {
     if (e.target.checked) {
-      this.props.action.updateTodoById(this.props.id, { status: "DONE" });
+      this.props.actions.apiUpdateTodoById(this.props.id, { status: "DONE" });
     } else {
-      this.props.action.updateTodoById(this.props.id, { status: "TODO" });
+      this.props.actions.apiUpdateTodoById(this.props.id, { status: "TODO" });
     }
   };
   render() {
@@ -34,9 +34,9 @@ class Status extends React.Component {
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  action: bindActionCreators(
+  actions: bindActionCreators(
     {
-      updateTodoById,
+      apiUpdateTodoById,
     },
     dispatch
   ),

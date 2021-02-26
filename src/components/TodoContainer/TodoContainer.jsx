@@ -1,37 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./TodoContainer.module.css";
 import Todo from "./Todo/Todo";
 import Add from "./Add/Add";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { apiLoadListTodos } from "../../actions/actions";
-import { bindActionCreators } from "redux";
+import { todosSelector } from "../../selectors/commonSelectors";
 
-class TodoContainer extends React.Component {
-  async componentDidMount() {
-    this.props.actions.apiLoadListTodos();
-  }
-  render() {
-    return (
-      <div className={classes.container}>
-        <Add />
-        {this.props.todos.map((todo) => (
-          <Todo key={todo.id} todos={todo}/>
-        ))}
-      </div>
-    );
-  }
-}
-const mapStateToProps = (state) => ({
-  todos: state.todos,
-});
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(
-    {
-      apiLoadListTodos,
-    },
-    dispatch
-  ),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer);
+const TodoContainer = () => {
+  const dispatch = useDispatch();
 
+  const todos = useSelector(todosSelector);
 
+  useEffect(() => {
+    const loadListTodos = () => apiLoadListTodos()(dispatch);
+    loadListTodos();
+  }, []);
+
+  return (
+    <div className={classes.container}>
+      <Add />
+      {todos.map((todo) => (
+        <Todo key={todo.id} todo={todo} />
+      ))}
+    </div>
+  );
+};
+
+export default TodoContainer;

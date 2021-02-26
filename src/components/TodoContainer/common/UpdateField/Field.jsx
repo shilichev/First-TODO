@@ -1,74 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "../../Todo/Todo.module.css";
 import UpdateField from "./UpdateField";
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { useDispatch } from "react-redux";
 import { apiUpdateTodoById } from "../../../../actions/actions";
+import { DESCRIPTION_NAME, TITLE_NAME } from "../../../../constants/constants";
 
-class Field extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      update: false,
-      scale: "",
-    };
-  }
+const Field = ({ id, scale, field }) => {
+  const [update, setUpdate] = useState(false);
+  const [value, setScale] = useState("");
+  const [status, setStatus] = useState("");
 
-  startField = () => {
-    this.setState({ update: !this.state.update });
+  const startField = () => {
+    setUpdate(!update); 
   };
 
-  updateField = (field) => {
-    this.startField();
-    console.log(this.state.status);
-    if (this.state.status) {
-      if (this.state.update)
-        this.props.actions.apiUpdateTodoById(this.props.id, { title: field });
-    } else {
-      if (this.state.update)
-        this.props.actions.apiUpdateTodoById(this.props.id, { description: field });
-    }
-  };
-  componentDidMount() {
-    if (this.props.scale === "title") {
-      this.setState({
-        scale: "title",
-        status: true,
-      });
-    } else if (this.props.scale === "description") {
-      this.setState({
-        scale: "description",
-        status: false,
-      });
-    }
-  }
-  render() {
-    return this.state.update ? (
-      <div className={classes.item}>
-        <UpdateField
-          status={this.state.status}
-          field={this.props.field}
-          updateField={this.updateField}
-          id={this.props.id}
-        />
-      </div>
-    ) : (
-      <div className={classes.item}>
-        <div className={this.state.scale} onClick={this.updateField}>
-          <label>{this.props.field}</label>
-        </div>
-      </div>
-    );
-  }
-}
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(
-    {
-      apiUpdateTodoById,
-    },
-    dispatch
-  ),
-});
+  const dispatch = useDispatch();
 
-export default connect(null, mapDispatchToProps)(Field);
+  const updateField = (field) => {
+    startField();
+    apiUpdateTodoById(id, {
+      [scale]: field,
+    })(dispatch);
+  };
+  const setUpdateField = () => {
+    startField();
+  };
+
+  useEffect(() => {
+    if (scale === TITLE_NAME) {
+      setScale(TITLE_NAME);
+      setStatus(true);
+    } else if (scale === DESCRIPTION_NAME) {
+      setScale(DESCRIPTION_NAME);
+      setStatus(false);
+    }
+  }, []);
+
+  return update ? (
+    <div className={classes.item}>
+      <UpdateField
+        status={status}
+        field={field}
+        updateField={updateField}
+        id={id}
+      />
+    </div>
+  ) : (
+    <div className={classes.item}>
+      <div className={scale} onClick={setUpdateField}>
+        <label>{field}</label>
+      </div>
+    </div>
+  );
+};
+
+export default Field;

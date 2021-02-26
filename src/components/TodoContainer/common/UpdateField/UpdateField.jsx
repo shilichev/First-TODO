@@ -1,64 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
+import { ENTER_KEY } from "../../../../constants/constants";
 import classes from "../../Todo/Todo.module.css";
 
-class UpdateField extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      field: this.props.field,
-    };
-  }
-  handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      this.props.updateField(this.state.field);
+const UpdateField =(props)=> {
+  const {status, updateField} = props;
+
+  const [field, setField]=useState(props.field)
+
+  const handleKeyDown = (e) => {
+    if (e.key === ENTER_KEY) {
+      updateField(field);
     }
   };
-  control = (e) => {
-    this.setState({
-      field: e.target.value,
-    });
+  const control = (e) => {
+    setField(e.target.value)
   };
 
-  buttonCancel = () => {
-    this.props.updateField(this.props.field);
+  const buttonCancel = () => {
+    updateField(props.field);
   };
-  buttonConfirm = () => {
-    this.props.updateField(this.state.field);
+  const buttonConfirm = () => {
+    updateField(field);
   };
 
-  render() {
-    const { field } = this.state;
     return (
-      <div className="title">
+      <div>
         <label>
-          {this.props.status ? (
-            <input
-              type="text"
-              value={field}
-              onChange={this.control}
-              onKeyDown={this.handleKeyDown}
+          {status ? (
+            <input type="text"
+                   value={field}
+                   onChange={control}
+                   onKeyDown={handleKeyDown}
             />
           ) : (
-            <textarea
-              value={field}
-              onChange={this.control}
-              onKeyDown={this.handleKeyDown}
+            <textarea value={field}
+                      onChange={control}
+                      onKeyDown={handleKeyDown}
             />
           )}
         </label>
         <div className={classes.buttons}>
-          <button onClick={this.buttonCancel}>
+          <button onClick={buttonCancel}>
             <i className="fas fa-window-close  "></i>
             Cancel
           </button>
-          <button onClick={this.buttonConfirm}>
+          <button onClick={buttonConfirm}>
             <i className="fas fa-check-square"></i>
             Confirm
           </button>
         </div>
       </div>
     );
-  }
 }
 
 export default UpdateField;

@@ -1,45 +1,39 @@
 import React from "react";
 import classes from "../Todo.module.css";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { useDispatch } from "react-redux";
 import { apiUpdateTodoById } from "../../../../actions/actions";
+import { STATUS_DONE, STATUS_TODO } from "../../../../constants/constants";
 
-class Status extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  toggleCheckboxChange = (e) => {
+const Status = ({ id, status }) => {
+  const dispatch = useDispatch();
+
+  const toggleCheckboxChange = (e) => {
     if (e.target.checked) {
-      this.props.actions.apiUpdateTodoById(this.props.id, { status: "DONE" });
+      apiUpdateTodoById(id, {
+        status: STATUS_DONE,
+      })(dispatch);
     } else {
-      this.props.actions.apiUpdateTodoById(this.props.id, { status: "TODO" });
+      apiUpdateTodoById(id, {
+        status: STATUS_TODO,
+      })(dispatch);
     }
   };
-  render() {
-    return (
-      <div className={classes.item}>
-        <div className={classes.checkbox}>
-          <label>
-            <input
-              type="checkbox"
-              checked={this.props.status === "DONE"}
-              onChange={this.toggleCheckboxChange}
-            />
 
-            {this.props.status}
-          </label>
-        </div>
+  return (
+    <div className={classes.item}>
+      <div className={classes.checkbox}>
+        <label>
+          <input
+            type="checkbox"
+            checked={status === STATUS_DONE}
+            onChange={toggleCheckboxChange}
+          />
+
+          {status}
+        </label>
       </div>
-    );
-  }
-}
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(
-    {
-      apiUpdateTodoById,
-    },
-    dispatch
-  ),
-});
+    </div>
+  );
+};
 
-export default connect(null, mapDispatchToProps)(Status);
+export default Status;

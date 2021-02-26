@@ -4,7 +4,6 @@ export const apiLoadListTodos = () => async (dispatch) => {
   let todoContainer = await fetch(
     "http://localhost:5000/todos"
   ).then((response) => response.json());
-  console.log(todoContainer);
   if (todoContainer.todos) {
     dispatch(setTodos(todoContainer.todos));
   }

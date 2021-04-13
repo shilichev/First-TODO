@@ -15,5 +15,5 @@ const Todo = ({ todo: { id, title, description, status } }) => (
     <Delete id={id} />
   </div>
 );
-
+  
 export default Todo;

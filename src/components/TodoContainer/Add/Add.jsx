@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import classes from "./Add.module.css";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { apiAddTodo } from "../../../actions/actions";
+import { addTodo } from "../../../slices/todos";
 
 const Add = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,14 @@ const Add = () => {
 
   const addNewTodo = (id) => {
     apiAddTodo(value, id)(dispatch);
+    dispatch(
+      addTodo({
+        title: value || "New Title",
+        id: id,
+        description: "New description",
+        status: "DONE",
+      })
+    );
   };
 
   const createRandomId = () => {

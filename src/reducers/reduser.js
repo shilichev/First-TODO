@@ -20,7 +20,7 @@ const todosReducer = (state = initialState, actions) => {
         if (item.id === actions.id) {
           return { ...item, ...actions.newTodo };
         }
-        
+
         return item;
       });
     }

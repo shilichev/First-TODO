@@ -4,7 +4,7 @@ import {
   UPDATE_TODO_BY_ID,
   SET_TODOS_LIST,
 } from "../constants/constants";
-export const addNewTodo = (newTodo) => ({
+export const addTodo = (newTodo) => ({
   type: ADD_NEW_TODO,
   newTodo,
 });

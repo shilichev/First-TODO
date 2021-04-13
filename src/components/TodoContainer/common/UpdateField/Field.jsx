@@ -5,6 +5,7 @@ import UpdateField from "./UpdateField";
 import { useDispatch } from "react-redux";
 import { apiUpdateTodoById } from "../../../../actions/actions";
 import { DESCRIPTION_NAME, TITLE_NAME } from "../../../../constants/constants";
+import { updateTodoById } from "../../../../slices/todos";
 
 const Field = ({ id, scale, field }) => {
   const [update, setUpdate] = useState(false);
@@ -12,7 +13,7 @@ const Field = ({ id, scale, field }) => {
   const [status, setStatus] = useState("");
 
   const startField = () => {
-    setUpdate(!update); 
+    setUpdate(!update);
   };
 
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Field = ({ id, scale, field }) => {
     apiUpdateTodoById(id, {
       [scale]: field,
     })(dispatch);
+    dispatch(updateTodoById({ id, [scale]: field }));
   };
   const setUpdateField = () => {
     startField();

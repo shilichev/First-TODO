@@ -9,9 +9,27 @@ const todosSlice = createSlice({
       return action.todos;
     },
     addTodo(state, action) {
-      return [action.payload, ...state]
+      return [action.payload, ...state];
+    },
+    deleteTodoById(state, action) {
+      return state.filter((item) => item.id !== action.payload);
+    },
+    updateTodoById(state, action) {
+      console.log(action);
+      return state.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, ...action.payload };
+        }
+
+        return item;
+      });
     },
   },
 });
 export default todosSlice.reducer;
-export const { addTodo, setTodoList } = todosSlice.actions;
+export const {
+  addTodo,
+  setTodoList,
+  deleteTodoById,
+  updateTodoById,
+} = todosSlice.actions;
